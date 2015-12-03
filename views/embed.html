@@ -1,0 +1,108 @@
+<!DOCTYPE html>	
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>
+				Embed a YouTube Player
+			</title>
+			<link rel="stylesheet" type="text/css" href="howToStylePages.css"></link>
+		</head>
+		<body>
+			<div class="titleBar">
+				<h1>YouTube API How-To Guide</h1>
+				<ul id="titleMenu">
+					<li><a href="issues.html">Common issues</a></li>
+					<li><a href="embed.html">Embed a YouTube player</a></li>
+					<li><a href="../howTo/howTo.html">Home page</a></li>
+					<li><a href="playback.html">Playback functions</a></li>
+					<li><a href="queue.html">Queuing functions</a></li>
+				</ul>
+			</div>	
+			<p>
+				In order to embed a YouTube player in your webpage, you will be using the IFrame API.  This will 
+				allow you more flexibility than the flash or JavaScript APIs which required you to embed a flash 
+				object.  The IFrame API instead uses the 
+				<code>&lt;iframe&gt;</code> 
+				tag to embed the video player, and Javascript 
+				to do things like queue videos for playback or adjust the volume. 
+				</br></br>
+				The sections below will help guide you through using the IFrame API
+			</p>
+			<h2>Requirements</h2>
+			<p>
+				The HTML5 <code>postMessage</code> feature must be supported by the browser.  This will alow scripts
+				that are on your machine to run on the videos located on the YouTube server without using the same
+				protocol, port number, etc.
+			</p>
+			<p>
+				The embedded player must be at least 200px by 200px, not including the control bar at the bottom.  The
+				YouTube recommended size for 16:9 players is 480px by 270px or larger.
+			</p>
+			<p>
+				Any web page that uses the IFrame API must implement the <code>onYouTubeIframeAPIReady</code> function.
+				This function will be called after the page has finished downloaded the JavaScript for the player and 
+				will enable you to use the the API on your page.
+			</p>
+			<h2>Loading a Video Player</h2>
+			<p>
+				You can load a YouTube video player in two ways.  The first is to use the <code>&lt;iframe&gt;</code>
+				tag yourself, and the second is to use JavaScript.
+			</p>
+			<p>
+				When using the <code>&lt;iframe&gt;</code> tag, you must specify all of your parameters inside the tag.
+				This includes the height and width of the player, the source location of the video, and the frameborder.
+				Below is an example.
+			</p>
+			<code id="indent">
+				&lt;iframe id="player" type="text/html" width="640" height="390" 
+				src="http://www.youtube.com/embed/VideoID?enablejsapi=1&origin=http://yourWebPage.com"
+				frameborder="0"&gt;&lt;/iframe&gt;
+			</code>
+			<ul id="indent">
+				<li>width refers to the width of the video player</li>
+				<li>height refers to the height of the video player</li>
+				<li>src contains the id of the video you wish to embed.  It is also a good idea to include the origin
+				parameter which specifies http vs https and the full domain of your host page.</li>
+			</ul>
+			<p>
+				If you would rather use JavaScript to create your YouTube player, then the function would like the 
+				following:
+			</p>
+			<code id="indent">
+				// This code loads the IFrame Player API code asynchronously.</br>
+				var tag = document.createElement('script');</br>
+				tag.src = "https://www.youtube.com/iframe_api";</br>
+				var firstScriptTag = document.getElementsByTagName('script')[0];</br>
+				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);</br>
+				</br>
+				// This function creates an &lt;iframe&gt; (and YouTube player)</br>
+				// after the API code downloads.</br>
+				var player;</br>
+				function onYouTubeIframeAPIReady() {</br>
+					player = new YT.Player('player', {</br>
+					height: '390',</br>
+					width: '640',</br>
+					videoId: 'ID of your video',</br>
+					events: {</br>
+						'onReady': onPlayerReady,</br>
+						'onStateChange': onPlayerStateChange</br>
+					}</br>
+					});</br>
+				}
+			</code>
+			<div id="citationIndent">Code above credit https://developers.google.com/youtube/iframe_api_reference</div>
+			<ul id="indent">
+				<li>The first section of this code loads the JavaScript API code and uses DOM modification to do it
+				asynchronously.</li>
+				<li>The second section of this code creates will create the YouTube player using the global variable
+				"player".
+			</ul>
+			<p>
+				Use the table of contents below to jump to the page that you want
+			</p>
+			<p  id="citation">
+				Content derived from YouTube produced documentation found at
+				<a href="https://developers.google.com/youtube/">https://developers.google.com/youtube/</a>.
+			</p>
+		</body>
+	</html>

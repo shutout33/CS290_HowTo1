@@ -1,0 +1,85 @@
+<!DOCTYPE html>	
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>
+				Playback Controls
+			</title>
+			<link rel="stylesheet" type="text/css" href="howToStylePages.css"></link>
+		</head>
+		<body>
+			<div class="titleBar">
+				<h1>YouTube API How-To Guide</h1>
+				<ul id="titleMenu">
+					<li><a href="issues.html">Common issues</a></li>
+					<li><a href="embed.html">Embed a YouTube player</a></li>
+					<li><a href="../howTo/howTo.html">Home page</a></li>
+					<li><a href="playback.html">Playback functions</a></li>
+					<li><a href="queue.html">Queuing functions</a></li>
+				</ul>
+			</div>			
+			<p>
+				Playback contols are critically important for any embedded video player.  Without them the user will
+				become very frustrated with the video.  Below, you will find a list of functions to allow playback
+				contol of your embedded player.
+				</br>
+			</p>
+			<h2>Playing a Video</h2>
+			<p>
+				The primary functions for video playback are <code>player.playVideo():Void</code>, <code>player.pauseVideo():Void</code>, 
+				<code>player.stopVideo():Void</code>, and <code>player.seekTo(seconds:Number, allowSeekAhead:Boolean):Void</code>.  
+				These functions do exactly what you expect; play, pause, stop, and the video.  
+			</p>
+			<p>
+				<code>player.playVideo()</code> will play the currently loaded/cued video.
+			</p>
+			<p>
+				<code>player.pauseVideo()</code> pauses the video that is currently playing uness the player is in the
+				<code>ended</code> state.
+			</p>
+			<p>
+				<code>player.stopVideo()</code> will stop playback and cancel the current video from loading.  Be careful 
+				when using this function.  Using the <code>stopVideo</code> function will deactivate your video player.
+				If you want to stop the current video from playing, use the <code>pauseVideo</code> function.  If your 
+				intent is to load a new video, you can call one of the <a href="queue.html">queuing</a> functions without
+				calling <code>player.stopVideo()</code>.
+			</p>
+			<p>
+				<code>player.seekTo(seconds:Number, allowSeekAhead:Boolean)</code> queues the video to a specific time in the
+				video.  If the video is paused when this function is called iy will continue to be paused.  If the video is in
+				any other state it will play.  <code>seconds</code> is the video time in seconds that the video will be 
+				advanced to.  The <code>allowSeekAhead</code> parameter determines whether or not the player will allow the
+				user to advance time past the cyrrent buffered time.  If this is is true and the user picks a playtime past 
+				the point of buffering, the playe will make another request to the server.
+			</p>
+			<h2>Playing a Video in a Playlist</h2>
+			<p>
+				Videos that are part of a playlist use the functions above for their basic controls, but have another set
+				of functions to move through the playlist.
+			</p>
+			<p>
+				<code>player.nextVideo():Void</code> loads and plays the next video in a playlist.
+			</p>
+			<p>
+				<code>player.previousVideo():Void</code> loads and plays the next video in a playlist.
+			</p>
+			<p>
+				<code>player.playVideoAt(index:Number):Void</code> loads and plays the video at a specified index in a 
+				playlist.  Note that the indexes start at 0 and increment from there.
+			</p>			
+			<h2>Other Useful Functions</h2>
+			<ul id="indent">
+				<li><code>player.setVolume():Void</code></li>
+				<li><code>player.mute():Void</code></li>
+				<li><code>player.unMute():Void</code></li>
+				<li><code>player.setShuffle(shufflePlaylist:Boolean):Void</code></li>
+			</ul>
+			<p>
+				Use the table of contents below to jump to the page that you want
+			</p>
+			<p  id="citation">
+				Content derived from YouTube produced documentation found at
+				<a href="https://developers.google.com/youtube/">https://developers.google.com/youtube/</a>.
+			</p>
+		</body>
+	</html>

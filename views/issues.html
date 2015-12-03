@@ -1,0 +1,88 @@
+<!DOCTYPE html>	
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>
+				YouTube API Issues
+			</title>
+			<link rel="stylesheet" type="text/css" href="howToStylePages.css"></link>
+		</head>
+		<body>
+			<div class="titleBar">
+				<h1>YouTube API How-To Guide</h1>
+				<ul id="titleMenu">
+					<li><a href="issues.html">Common issues</a></li>
+					<li><a href="embed.html">Embed a YouTube player</a></li>
+					<li><a href="../howTo/howTo.html">Home page</a></li>
+					<li><a href="playback.html">Playback functions</a></li>
+					<li><a href="queue.html">Queuing functions</a></li>
+				</ul>
+			</div>	
+			<p>
+				Unfortunately, very few thing are error free the first time.  In this section, we will discuss some
+				common issues with the YouTube API, and how to fix them. 
+			</p>
+			<h2>Video Unavailable</h2>
+			<p>
+				The YouTube API does not filter videos that are not available.  Because of this, a video that you
+				think is ready may display "[video unavailable]".  Since YouTube does not remove metadata such as a
+				video's title and description after it is deleted, your player will still try to load and play it.
+			</p>
+			<p>
+				The simplest way to fix this is to remove the video from any playlists and/or single content players.
+				For single content players, change the <code>videoId</code> parameter in your load or cue function.
+			</p>
+			<code id="indent">
+				player.cueVideoById(ABC123); //ABC123 is unavailable</br>
+				becomes</br>
+				player.cueVideoById(DEF456); //This video may be available.
+			</code>
+			<div id="indent">Note: if you do not wish to replace the video with a different one, your best course of 
+			action is to delete the player entirely.
+			</div>
+			<p>
+				If the video was part of a playlist, remove the unavailable video ID from the array (string if using
+				object syntax) of IDs in the playlist.
+			</p>
+			<code id="indent">
+				var playlist = [ABC123, DEF456, GHI789]; //ABC123 is unavailable</br>
+				becomes</br>
+				var playlist = [DEF456, GHI789];
+			</code>
+			<div id="indent">
+				Note: You can also replace the <code>videoId</code> with a different video if you prefer.
+			</div>
+			<h2>Identifying a Video</h2>
+			<p>
+				A common mistake when trying to identify a video for operations such as rating or adding to favorites
+				is the use of the <code>&lt;id&gt;</code> tag instead of the <code>&lt;yt:videoid&gt;</code> tag.
+				Doing this may cause the action to be applyed to the wrong video since the <code>&lt;id&gt;</code> tag
+				changes depending on the given usage (playlist, search, etc.), whereas the <code>&lt;yt:videoid&gt;
+				</code> tag will always refer to the same video.</br></br>
+				
+				The following code is an example of what the <code>&lt;yt:videoid&gt;</code> should look like.
+			</p>
+			<code id="indent">
+				&lt;entry xmlns="http://www/w3.org/2005/Atom"&gt;</br>
+					&lt;id&gt;VIDEO_ID&lt;/id&gt;</br>
+					&lt;yt:position&gt;1&lt;/yt:position&gt;</br>
+				&lt;/entry&gt;
+			</code>		
+			<div id="citationIndent">Code above credit https://developers.google.com/youtube/2.0/developers_guide_protocol_testing</div>
+			<h2>The Staging Server</h2>
+			<p>
+				A great way to test your application is by using the YouTube staging server.  This server houses the
+				latest versions of the API before it is realeased into production.  In this way, YouTube can ensure
+				that their API "does not include any unexpected or undesired changes".  You can test your web page
+				or application against the staging server using the same code that you already have, but submit to a
+				different host name.  This different host name is the same but with <code>stage</code> in it.</br></br>
+				For example, <code>https://gdata.youtube.com/feeds/api/videos</code> would be replaced with <code>
+				https://stage.gdata.youtube.com/feeds/api/videos</code>.  This host is used for all queries except
+				uploads.  For uploads, place <code>uploads</code> in front of stage (<code>...//uploads.stage...</code>).
+			</p>
+			<p  id="citation">
+				Content derived from YouTube produced documentation found at
+				<a href="https://developers.google.com/youtube/">https://developers.google.com/youtube/</a>.
+			</p>
+		</body>
+	</html>

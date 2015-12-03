@@ -1,0 +1,70 @@
+code {
+	background-color: gainsboro;
+}
+
+h2	{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+p	{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#citation {
+	font-size: 75%;
+	padding-right: 10%;	
+}
+
+#citationIndent	{
+	font-size: 75%;	
+	position: relative;
+	left: 10%;	
+	padding-right: 10%;	
+}
+#titleMenu	{
+	color: white;
+	background-color: red;
+	display: inline-block;
+	text-align: center;
+	padding-left: 10px;
+}
+
+#titleMenu a:visited	{
+	color: white;
+	background-color: red;
+	display: inline-block;
+	text-align: center;
+	padding-left: 10px;
+}
+
+#indent	{
+	position: relative;
+	left: 10%;
+	padding-right: 10%;
+}
+
+#homeMenu	{
+	padding-left: 10%;
+	list-style-type: none;
+}
+.titleBar	{
+	background-color: red;
+	color: white;
+	width: 100%;
+	height: 75px;
+	display: block;
+	top: 0;
+	left: 0;
+	text-align: center;
+	padding-bottom:20px;
+}
+
+.titleBar ul li	{
+	color: white;
+	background-color: red;
+	display: inline-block;
+	text-align: center;
+	padding-left: 10px;
+}
